@@ -111,13 +111,18 @@ function publishAndSubscribe(OT: OT.Client, options?: NetworkTestOptions) {
   return (session: OT.Session): Promise<PublisherSubscriber> =>
     new Promise((resolve, reject) => {
       type StreamCreatedEvent = OT.Event<'streamCreated', OT.Publisher> & { stream: OT.Stream };
-      const containerDiv = document.createElement('div');
-      containerDiv.style.position = 'fixed';
-      containerDiv.style.bottom = '-1px';
-      containerDiv.style.width = '1px';
-      containerDiv.style.height = '1px';
-      containerDiv.style.opacity = '0';
-      document.body.appendChild(containerDiv);
+      let containerDiv;
+      if (options && options.publishElement) {
+        containerDiv = options.publishElement;
+      } else {
+        containerDiv = document.createElement('div');
+        containerDiv.style.position = 'fixed';
+        containerDiv.style.bottom = '-1px';
+        containerDiv.style.width = '1px';
+        containerDiv.style.height = '1px';
+        containerDiv.style.opacity = '0';
+        document.body.appendChild(containerDiv);
+      }
       validateDevices(OT)
         .then((availableDevices: AvailableDevices) => {
           if (!Object.keys(availableDevices.video).length) {
