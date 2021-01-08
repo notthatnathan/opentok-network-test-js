@@ -111,7 +111,7 @@ function publishAndSubscribe(OT: OT.Client, options?: NetworkTestOptions) {
   return (session: OT.Session): Promise<PublisherSubscriber> =>
     new Promise((resolve, reject) => {
       type StreamCreatedEvent = OT.Event<'streamCreated', OT.Publisher> & { stream: OT.Stream };
-      let containerDiv;
+      let containerDiv: any;
       if (options && options.publishElement) {
         containerDiv = options.publishElement;
       } else {

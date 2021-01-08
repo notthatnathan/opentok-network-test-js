@@ -8,7 +8,8 @@ let audioOnly;
 
 const precallDiv = document.getElementById('precall');
 precallDiv.querySelector('#precall button').addEventListener('click', function () {
-    document.getElementById('connectivity_status_container').style.display = 'block';
+    document.getElementById('quality_status_container').style.display = 'block';
+    document.getElementById('qualityTestContainerWrapper').style.display = 'block';
     precallDiv.style.display = 'none';
     startTest();
 })
@@ -19,12 +20,11 @@ function startTest() {
     var timeout = timeoutSelect.options[timeoutSelect.selectedIndex].text * 1000;
     var options = {
         audioOnly: audioOnly,
-        timeout: timeout
+        timeout: timeout,
+        publishElement: 'qualityTestContainer',
     };
     otNetworkTest = new NetworkTest(OT, sessionInfo, options);
-    otNetworkTest.testConnectivity()
-        .then(results => ConnectivityUI.displayTestConnectivityResults(results))
-        .then(testQuality);
+    testQuality();
 }
 
 function testQuality() {

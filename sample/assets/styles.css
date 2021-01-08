@@ -104,6 +104,17 @@ div.prettyBox img {
   width: 50px;
 }
 
+#qualityTestContainer {
+  display: flex;
+  height: 500px;
+  align-items: stretch;
+}
+
+#qualityTestContainer .OT_root {
+  flex-basis: 50%;
+  height: 100% !important;
+}
+
 #precall {
   display: block
 }
